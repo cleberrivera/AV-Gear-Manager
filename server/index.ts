@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cookieParser from "cookie-parser";
 import path from "node:path";
+import os from "node:os";
 import fs from "node:fs";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "./routers";
@@ -56,7 +57,7 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`[AV Gear Manager] Server running on http://localhost:${PORT}`);
   if (isDev) {
     // Show local network IP for smartphone access
-    const nets = require("node:os").networkInterfaces();
+    const nets = os.networkInterfaces();
     for (const name of Object.keys(nets)) {
       for (const net of nets[name] ?? []) {
         if (net.family === "IPv4" && !net.internal) {

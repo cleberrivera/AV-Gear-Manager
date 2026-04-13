@@ -17,7 +17,7 @@ const ENV_PATH = path.resolve(".env");
 
 // ─── 1. Create .env if missing ──────────────────────────────────────────────
 
-function ensureEnv() {
+async function ensureEnv() {
   if (fs.existsSync(ENV_PATH)) {
     console.log("[Setup] .env already exists, skipping creation");
     return;
@@ -52,7 +52,7 @@ function ensureEnv() {
   console.log("[Setup] Default admin email: admin@avmanager.com");
 
   // Reload env vars
-  const dotenv = require("dotenv");
+  const dotenv = await import("dotenv");
   dotenv.config({ path: ENV_PATH, override: true });
 }
 
